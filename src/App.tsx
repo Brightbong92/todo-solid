@@ -12,10 +12,10 @@ function App() {
         </p>
         <a
           class={styles.link}
-          href="/home"
+          href="/list"
           rel="noopener noreferrer"
         >
-          Go To Todo
+          Go To Todo List
         </a>
       </header>
     </div>
