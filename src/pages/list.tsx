@@ -1,15 +1,16 @@
-import { createSignal, For, Match, Switch } from "solid-js";
+import { For, Match, Switch } from "solid-js";
 import useList from "../hooks/useList";
 
 export function ListPage() {
   const {
+    setTextRef,
     list,
     text,
     editingId,
     editingText,
     onInputText,
     onEditInputText,
-    onAddButon,
+    onAddButton,
     onEditButton,
     onSaveEditButton,
     onRemoveButton,
@@ -21,8 +22,13 @@ export function ListPage() {
         <strong>Your text is:</strong> {text()}
       </p>
 
-      <input placeholder="입력해주세요." value={text()} onInput={onInputText} />
-      <button type="button" onClick={onAddButon}>
+      <input
+        ref={setTextRef}
+        placeholder="입력해주세요."
+        value={text()}
+        onInput={onInputText}
+      />
+      <button type="button" onClick={onAddButton}>
         등록
       </button>
 
@@ -32,7 +38,7 @@ export function ListPage() {
         <Match when={list().length > 0}>
           <ul>
             <For each={list()}>
-              {(todo) => (
+              {(todo, index) => (
                 <li class="flex mb-[4px]">
                   {editingId() === todo.id ? (
                     <>
@@ -53,7 +59,9 @@ export function ListPage() {
                       <button
                         type="button"
                         class="mr-[4px]"
-                        onClick={() => onEditButton(todo.id, todo.text)}
+                        onClick={() =>
+                          onEditButton(todo.id, todo.text)
+                        }
                       >
                         edit
                       </button>

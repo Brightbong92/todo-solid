@@ -1,3 +1,4 @@
+import { createAutofocus } from "@solid-primitives/autofocus";
 import { createSignal } from "solid-js";
 
 export type TodoType = {
@@ -43,7 +44,7 @@ const useList = () => {
     setEditingText(_text);
   };
 
-  const onAddButon = () => {
+  const onAddButton = () => {
     if (text().trim() === "") {
       updateText("");
       return;
@@ -51,6 +52,7 @@ const useList = () => {
     const newList = addList([...list()], text());
     updateList(newList);
     updateText("");
+    createAutofocus(textRef);
   };
 
   const onInputText = (
@@ -92,14 +94,19 @@ const useList = () => {
     const newList = removeList([...list()], id);
     updateList(newList);
   };
+
+  const [textRef, setTextRef] = createSignal<HTMLInputElement | null>(null);
+  createAutofocus(textRef);
+
   return {
+    setTextRef,
     list,
     text,
     editingId,
     editingText,
     onInputText,
     onEditInputText,
-    onAddButon,
+    onAddButton,
     onEditButton,
     onSaveEditButton,
     onRemoveButton,
