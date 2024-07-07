@@ -12,11 +12,10 @@ function App() {
         </p>
         <a
           class={styles.link}
-          href="https://github.com/solidjs/solid"
-          target="_blank"
+          href="/home"
           rel="noopener noreferrer"
         >
-          Learn Solid
+          Go To Todo
         </a>
       </header>
     </div>
